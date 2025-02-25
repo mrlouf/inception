@@ -11,7 +11,9 @@ RUN mkdir -p /var/run/mysqld \
 	&& chown -R mysql:mysql /var/run/mysqld \
 	&& chmod 777 /var/run/mysqld
 
-COPY mariadb.sh /mariadb.sh
+EXPOSE 3306
+
+COPY tools/mariadb.sh /mariadb.sh
 RUN chmod +x /mariadb.sh
 
 CMD ["/mariadb.sh"]
