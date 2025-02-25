@@ -14,4 +14,4 @@ RUN mkdir -p /var/run/mysqld \
 COPY mariadb.sh /mariadb.sh
 RUN chmod +x /mariadb.sh
 
-ENTRYPOINT /mariadb.sh
+CMD ["/mariadb.sh"]

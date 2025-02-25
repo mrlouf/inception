@@ -1,4 +1,4 @@
-#!bin/bash/
+#!/bin/bash
 
 # Checks for volume and creates it if needed
 [ ! -d "$HOME/data/mysql" ] && mkdir -p "$HOME/data/mysql"
