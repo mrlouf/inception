@@ -1,3 +1,8 @@
+#!bin/bash/
+
+# Checks for volume and creates it if needed
+[ ! -d "$HOME/data/mysql" ] && mkdir -p "$HOME/data/mysql"
+
 service mysql start;
 mysql -e "CREATE DATABASE IF NOT EXISTS \'${SQL_DATABASE}\';"
 mysql -e "CREATE USER IF NOT EXISTS \`${SQL_USER}\`@'localhost' IDENTIFIED BY '${SQL_PASSWORD}';"
