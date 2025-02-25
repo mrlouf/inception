@@ -18,3 +18,7 @@ RUN chmod 755 /var/www/wordpress
 RUN wget https://github.com/wp-cli/wp-cli/raw/refs/heads/main/utils/wp-completion.bash
 RUN chmod +x wp-completion.bash
 RUN mv wp-completion.bash /usr/local/bin/wp
+
+COPY conf/auto_config.sh auto_config.sh
+
+ENTRYPOINT ["bash", "auto_config.sh"]
