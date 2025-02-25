@@ -1,4 +1,6 @@
 up:
+	mkdir -p ${HOME}/data/wordpress
+	mkdir -p ${HOME}/data/mysql
 	docker compose -f ./srcs/docker-compose.yml up -d --build
 
 down:
