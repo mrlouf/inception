@@ -19,7 +19,6 @@ volumes:
 services:
   nginx:
     image: nginx
-    container_name: nginx
     build: ./requirements/nginx
     ports:
       - 443:443
@@ -38,7 +37,6 @@ services:
 
   mariadb:
     image: mariadb
-    container_name: mariadb
     build: ./requirements/mariadb
     volumes:
       - mariadb_data:/var/lib/mysql
@@ -47,10 +45,15 @@ services:
     restart: always
     networks:
       - inception
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "--host=localhost"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 5s
 
   wordpress:
     image: wordpress
-    container_image: wordpress
     build: ./requirements/wordpress
     volumes:
       - wordpress_data:/var/www/html
