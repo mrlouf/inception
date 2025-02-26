@@ -62,3 +62,10 @@ services:
     restart: always
     networks:
       - inception
+
+  go-web:
+    build: ./requirements/go-web
+    ports:
+      - "8080:8080"
+    networks:
+      - inception
