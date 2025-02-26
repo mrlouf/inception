@@ -3,22 +3,19 @@ FROM debian:buster
 RUN apt-get -y update
 RUN apt-get -y upgrade
 
-RUN apt-get -y install wget
-
-RUN apt-get install -y php7.3 php-fpm php-mysql mariadb-client
+RUN apt-get install -y php7.3 php-fpm php-mysql mariadb-client curl
 
 COPY conf/www.conf /etc/php/7.3/fpm/pool.d/
 
-RUN wget https://fr.wordpress.org/wordpress-6.7-fr_FR.tar.gz -P /var/www
+RUN mkdir -p /run/php && chmod 755 /run/php
 
-RUN cd /var/www && tar -xzf wordpress-6.7-fr_FR.tar.gz && rm wordpress-6.7-fr_FR.tar.gz
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
+    && chmod +x wp-cli.phar \
+    && mv wp-cli.phar /usr/local/bin/wp
 
-RUN chmod 755 /var/www/wordpress
+COPY tools/auto_config.sh /usr/local/bin/auto_config.sh
+RUN chmod +x /usr/local/bin/auto_config.sh
 
-RUN wget https://github.com/wp-cli/wp-cli/raw/refs/heads/main/utils/wp-completion.bash
-RUN chmod +x wp-completion.bash
-RUN mv wp-completion.bash /usr/local/bin/wp
+WORKDIR /var/www/html
 
-COPY conf/auto_config.sh auto_config.sh
-
-ENTRYPOINT ["bash", "auto_config.sh"]
+ENTRYPOINT ["bash", "/usr/local/bin/auto_config.sh"]
