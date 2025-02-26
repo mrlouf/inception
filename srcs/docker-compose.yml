@@ -22,7 +22,7 @@ services:
     build: ./requirements/nginx
     ports:
       - 443:443
-    depends_on: # start after mariadb and wordpress are ready
+    depends_on: # start when mariadb and wordpress are ready
       mariadb:
         condition: service_healthy
       wordpress:
@@ -46,7 +46,7 @@ services:
     networks:
       - inception
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "--host=localhost"]
+      test: ["CMD", "mysqladmin", "ping", "-uroot", "-p${SQL_ROOT_PASSWORD}"]
       interval: 10s
       retries: 5
       #start_period: 30s
