@@ -18,8 +18,8 @@ volumes:
 
 services:
   nginx:
-    image: nginx
     build: ./requirements/nginx
+    image: nginx
     ports:
       - 443:443
     depends_on: # start when mariadb and wordpress are ready
@@ -36,8 +36,8 @@ services:
       - inception
 
   mariadb:
-    image: mariadb
     build: ./requirements/mariadb
+    image: mariadb
     volumes:
       - mariadb_data:/var/lib/mysql
     env_file:
@@ -53,8 +53,8 @@ services:
       timeout: 5s
 
   wordpress:
-    image: wordpress
     build: ./requirements/wordpress
+    image: wordpress
     volumes:
       - wordpress_data:/var/www/html
     env_file:
@@ -65,7 +65,22 @@ services:
 
   go-web:
     build: ./requirements/go-web
+    image: go-web
     ports:
       - "8080:8080"
+    networks:
+      - inception
+
+  ftp:
+    build: ./requirements/ftp
+    image: ftp
+    ports:
+      - "21:21"
+      - "21000-21010:21000-21010"
+    volumes:
+      - wordpress_data:/data
+    restart: always
+    env_file:
+      - .env
     networks:
       - inception

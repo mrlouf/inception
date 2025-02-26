@@ -20,7 +20,6 @@ WORKDIR /var/www/html
 
 RUN chown -R www-data:www-data /var/www/html
 RUN mkdir -p /var/www/html/wp-content/uploads
-RUN chown -R www-data:www-data /var/www/html/wp-content/uploads
-RUN chmod -R 755 /var/www/html/wp-content/uploads
+RUN chmod -R 755 /var/www/html/
 
 ENTRYPOINT ["bash", "/usr/local/bin/auto_config.sh"]

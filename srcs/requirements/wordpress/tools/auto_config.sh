@@ -39,6 +39,11 @@ else
 
     # Install and activate the default WordPress theme
     wp theme install twentytwentyfour --activate --allow-root
+
+    adduser $FTP_USER www-data
+    chown -R www-data:www-data /var/www
+    chmod -R g+rw /var/www
+    
 fi
 
 # Start PHP-FPM in the foreground for proper container behavior
