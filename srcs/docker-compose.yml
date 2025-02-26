@@ -5,16 +5,8 @@ networks:
 volumes:
   mariadb_data:
     driver: local
-    driver_opts:
-      type: none
-      device: ${HOME}/data/mysql
-      o: bind
   wordpress_data:
     driver: local
-    driver_opts:
-      type: none
-      device: ${HOME}/data/wordpress
-      o: bind
 
 services:
   nginx:
@@ -78,7 +70,7 @@ services:
       - "21:21"
       - "21000-21010:21000-21010"
     volumes:
-      - wordpress_data:/data
+      - wordpress_data:/home/vsftpd
     restart: always
     env_file:
       - .env

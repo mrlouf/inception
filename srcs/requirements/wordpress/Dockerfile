@@ -3,7 +3,7 @@ FROM debian:buster
 RUN apt-get -y update
 RUN apt-get -y upgrade
 
-RUN apt-get install -y php7.3 php-fpm php-mysql mariadb-client curl
+RUN apt-get install -y php7.3 php-fpm php-mysql php-gd mariadb-client curl
 
 COPY conf/www.conf /etc/php/7.3/fpm/pool.d/
 
