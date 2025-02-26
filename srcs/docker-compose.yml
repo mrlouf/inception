@@ -77,3 +77,11 @@ services:
     restart: always
     networks:
       - inception
+
+  adminer:
+    build: ./requirements/adminer
+    ports:
+      - "8081:8080"
+    restart: always
+    networks:
+      - inception
