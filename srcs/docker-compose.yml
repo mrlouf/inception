@@ -11,7 +11,6 @@ volumes:
 services:
   nginx:
     build: ./requirements/nginx
-    image: nginx
     ports:
       - 443:443
     depends_on: # start when mariadb and wordpress are ready
@@ -29,7 +28,6 @@ services:
 
   mariadb:
     build: ./requirements/mariadb
-    image: mariadb
     volumes:
       - mariadb_data:/var/lib/mysql
     env_file:
@@ -46,7 +44,6 @@ services:
 
   wordpress:
     build: ./requirements/wordpress
-    image: wordpress
     volumes:
       - wordpress_data:/var/www/html
     env_file:
@@ -57,7 +54,6 @@ services:
 
   go-web:
     build: ./requirements/go-web
-    image: go-web
     ports:
       - "8080:8080"
     networks:
@@ -65,7 +61,6 @@ services:
 
   ftp:
     build: ./requirements/ftp
-    image: ftp
     ports:
       - "21:21"
       - "21000-21010:21000-21010"
@@ -74,5 +69,11 @@ services:
     restart: always
     env_file:
       - .env
+    networks:
+      - inception
+
+  redis:
+    build: ./requirements/redis
+    restart: always
     networks:
       - inception
