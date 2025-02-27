@@ -1,4 +1,17 @@
-FROM golang:1.22.2-alpine
+FROM debian:bullseye
+
+# Install necessary dependencies
+RUN apt-get update && apt-get install -y \
+    curl \
+    build-essential
+
+# Install Go
+RUN curl -OL https://golang.org/dl/go1.22.2.linux-amd64.tar.gz \
+    && tar -C /usr/local -xzf go1.22.2.linux-amd64.tar.gz \
+    && rm go1.22.2.linux-amd64.tar.gz
+
+# Set up Go environment variables
+ENV PATH="/usr/local/go/bin:${PATH}"
 
 WORKDIR /app
 
