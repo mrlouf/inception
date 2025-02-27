@@ -47,4 +47,4 @@ else
 fi
 
 # Start PHP-FPM in the foreground for proper container behavior
-exec /usr/sbin/php-fpm7.3 -F
+exec /usr/sbin/php-fpm7.4 -F

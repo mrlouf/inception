@@ -1,4 +1,4 @@
-FROM alpine:3.14
+FROM alpine:3.20
 
 # Install Redis
 RUN apk update && apk add --no-cache redis

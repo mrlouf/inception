@@ -15,7 +15,7 @@ echo "SQL_PASSWORD: $SQL_PASSWORD"
 # Checks for volume and creates it if needed
 [ ! -d "$HOME/data/mysql" ] && mkdir -p "$HOME/data/mysql"
 
-service mysql start
+service mariadb start
 
 # Wait for MariaDB to be ready
 until mysqladmin ping --silent; do
