@@ -1,4 +1,4 @@
-FROM	debian:buster
+FROM	debian:bullseye
 
 # make sure packets are up-to-date
 RUN apt update
