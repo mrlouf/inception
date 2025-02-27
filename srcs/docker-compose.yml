@@ -7,6 +7,8 @@ volumes:
     driver: local
   wordpress_data:
     driver: local
+  portainer_data:
+    driver: local
 
 services:
   nginx:
@@ -83,6 +85,17 @@ services:
     build: ./requirements/adminer
     ports:
       - "8082:8081"
+    restart: always
+    networks:
+      - inception
+
+  portainer:
+    build: ./requirements/portainer
+    ports:
+      - "9443:9443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
     restart: always
     networks:
       - inception
