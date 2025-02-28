@@ -1,13 +1,13 @@
 FROM alpine:3.20
 
-RUN apk update && apk add vsftpd
+RUN apk add --no-cache pure-ftpd
 
 # Copy the script
 COPY ./tools/ftp.sh /usr/local/bin/ftp.sh
 
 # Configure vsftpd
-COPY ./conf/vsftpd.conf /etc/vsftpd/vsftpd.conf
+COPY ./conf/pure-ftpd.conf /etc/pure-ftpd.conf
 
-EXPOSE 21 21000-21010
+EXPOSE 2121 21100-21110
 
 CMD ["/usr/local/bin/ftp.sh"]

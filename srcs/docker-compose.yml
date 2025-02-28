@@ -13,7 +13,7 @@ volumes:
 services:
   nginx:
     build: ./requirements/nginx
-    image: nginx
+    container_name: nginx
     ports:
       - 443:443
     depends_on: # start when mariadb and wordpress are ready
@@ -33,7 +33,7 @@ services:
 
   mariadb:
     build: ./requirements/mariadb
-    image: mariadb
+    container_name: mariadb
     volumes:
       - mariadb_data:/var/lib/mysql
     env_file:
@@ -50,7 +50,7 @@ services:
 
   wordpress:
     build: ./requirements/wordpress
-    image: wordpress
+    container_name: wordpress
     volumes:
       - wordpress_data:/var/www/html
     env_file:
@@ -61,7 +61,7 @@ services:
 
   go-web:
     build: ./requirements/go-web
-    image: go-web
+    container_name: go-web
     ports:
       - "8080:8080"
     networks:
@@ -69,12 +69,12 @@ services:
 
   ftp:
     build: ./requirements/ftp
-    image: ftp
+    container_name: ftp
     ports:
-      - "2121:21"
-      - "22000-22010:21000-21010" 
+      - "2121:2121"
+      - "21100-21110:21100-21110"
     volumes:
-      - wordpress_data:/home/vsftpd
+      - wordpress_data:/home/$FTP_USER
     restart: always
     env_file:
       - .env
@@ -83,14 +83,14 @@ services:
 
   redis:
     build: ./requirements/redis
-    image: redis
+    container_name: redis
     restart: always
     networks:
       - inception
 
   adminer:
     build: ./requirements/adminer
-    image: adminer
+    container_name: adminer
     ports:
       - "8082:8081"
     restart: always
@@ -99,7 +99,7 @@ services:
 
   portainer:
     build: ./requirements/portainer
-    image: portainer
+    container_name: portainer
     ports:
       - "9443:9443"
     volumes:
