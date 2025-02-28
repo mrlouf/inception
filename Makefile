@@ -4,7 +4,7 @@ up:
 	docker compose --env-file ./srcs/.env -f ./srcs/docker-compose.yml up -d --build
 
 down:
-	docker compose -f ./srcs/docker-compose.yml down
+	docker compose -f ./srcs/docker-compose.yml down --remove-orphans
 
 re:
 	$(MAKE) down
