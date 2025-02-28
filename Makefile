@@ -6,7 +6,7 @@
 #    By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/28 13:10:42 by nponchon          #+#    #+#              #
-#    Updated: 2025/02/28 13:14:39 by nponchon         ###   ########.fr        #
+#    Updated: 2025/02/28 17:52:14 by nponchon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ re:
 	$(MAKE) up
 
 clean:
-	docker compose -f ./srcs/docker-compose.yml down --rmi all --volumes --remove-orphan
+	docker compose -f ./srcs/docker-compose.yml down --remove-orphans --rmi all --volumes
 	docker volume prune
 
 
