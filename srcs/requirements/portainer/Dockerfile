@@ -1,6 +1,5 @@
 FROM alpine:3.20
 
-# Install dependencies
 RUN apk update && apk add --no-cache ca-certificates curl
 
 # Get Portainer binary
@@ -13,7 +12,6 @@ RUN mkdir -p /app \
 # Expose the ports Portainer uses
 EXPOSE 8000 9443
 
-# Create volume directory
 RUN mkdir -p /data
 
 # Define volumes for persistent data and Docker socket

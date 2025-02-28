@@ -1,6 +1,5 @@
 FROM debian:bullseye
 
-# Install necessary dependencies
 RUN apt-get update && apt-get install -y \
     curl \
     build-essential
@@ -15,7 +14,7 @@ ENV PATH="/usr/local/go/bin:${PATH}"
 
 WORKDIR /app
 
-# Copy go.mod and go.sum files
+# Copy go.mod (go.sum not needed)
 COPY go.mod ./
 
 # Download dependencies

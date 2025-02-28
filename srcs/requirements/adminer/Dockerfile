@@ -1,6 +1,5 @@
 FROM debian:bullseye
 
-# Install necessary dependencies
 RUN apt-get update && apt-get install -y \
     apache2 \
     php7.4 \
@@ -13,16 +12,13 @@ RUN apt-get update && apt-get install -y \
     libfreetype6-dev \
     curl
 
-# Copy the script into the container
 COPY tools/php_extensions.sh /usr/local/bin/php_extensions.sh
 
-# Make the script executable
 RUN chmod +x /usr/local/bin/php_extensions.sh
 
 # Run the script to install PHP extensions
 RUN /usr/local/bin/php_extensions.sh
 
-# Install Adminer
 RUN mkdir -p /var/www/html/adminer \
     && curl -L https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1.php -o /var/www/html/adminer/index.php
 
@@ -30,7 +26,6 @@ RUN mkdir -p /var/www/html/adminer \
 RUN echo "<Directory /var/www/html/adminer>\n\tOptions Indexes FollowSymLinks\n\tAllowOverride None\n\tRequire all granted\n</Directory>" >> /etc/apache2/sites-available/000-default.conf
 RUN echo "ServerName 127.0.0.1" >> /etc/apache2/apache2.conf
 
-# Expose port 8081
 EXPOSE 8081
 
 # Start PHP-FPM & Apache server
