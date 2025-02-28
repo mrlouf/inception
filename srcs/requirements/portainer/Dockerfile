@@ -1,23 +1,29 @@
 FROM alpine:3.20
 
-# Install necessary packages
-RUN apk add --no-cache curl tar
+# Install dependencies
+RUN apk update && apk add --no-cache ca-certificates curl
 
-# Download and extract Portainer from GitHub
-RUN curl -L https://github.com/portainer/portainer/releases/download/2.18.4/portainer-2.18.4-linux-amd64.tar.gz -o portainer.tar.gz \
-    && tar -xvzf portainer.tar.gz --strip-components=1 \
-    && mv portainer /usr/local/bin/portainer \
-    && rm -rf portainer.tar.gz
+# Get Portainer binary
+RUN mkdir -p /app \
+    && cd /app \
+    && wget https://github.com/portainer/portainer/releases/download/2.27.1/portainer-2.27.1-linux-amd64.tar.gz \
+    && tar xvzf portainer-2.27.1-linux-amd64.tar.gz --strip-components=1 \
+    && rm portainer-2.27.1-linux-amd64.tar.gz
 
-# Install Docker Compose plugin
-RUN curl -L https://github.com/docker/compose/releases/download/v2.18.1/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose \
-    && chmod +x /usr/local/bin/docker-compose
+# Expose the ports Portainer uses
+EXPOSE 8000 9443
 
-# Change the bind_address of Portainer
-# RUN sed -i 's/9000/9042/' /usr/local/bin/portainer
+# Create volume directory
+RUN mkdir -p /data
 
-# Expose the necessary ports
-EXPOSE 9443
+# Define volumes for persistent data and Docker socket
+VOLUME ["/data", "/var/run/docker.sock"]
 
-# Set entrypoint
-ENTRYPOINT ["/usr/local/bin/portainer"]
+# Set container to always restart
+LABEL com.centurylinklabs.watchtower.enable="true"
+
+# Set working directory
+WORKDIR /app
+
+# Define the command to run Portainer
+ENTRYPOINT ["/app/portainer"]

@@ -20,6 +20,8 @@ services:
         condition: service_healthy
       wordpress:
         condition: service_started
+      portainer:
+        condition: service_started
     volumes:
       - wordpress_data:/var/www/html
     env_file:
@@ -81,7 +83,6 @@ services:
       - inception
 
   adminer:
-    image: adminer
     build: ./requirements/adminer
     ports:
       - "8082:8081"
@@ -94,7 +95,6 @@ services:
     ports:
       - "9443:9443"
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
       - portainer_data:/data
     restart: always
     networks:
