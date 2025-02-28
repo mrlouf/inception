@@ -21,6 +21,11 @@ else
         --dbhost=$SQL_HOSTNAME \
         --allow-root
 
+    # Add Redis configuration to wp-config.php
+    wp config set WP_REDIS_HOST redis --allow-root
+    wp config set WP_REDIS_PORT 6379 --allow-root
+    wp config set WP_CACHE true --allow-root
+
     # Install WordPress with the given site details
     wp core install \
         --url=$DOMAIN_NAME \
@@ -36,6 +41,12 @@ else
         --role=contributor \
         --user_pass=$WORDPRESS_USER_PASS \
         --allow-root \
+
+    # Install and activate the Redis Object Cache plugin
+    wp plugin install redis-cache --activate --allow-root
+    
+    # Enable the Redis object cache
+    wp redis enable --allow-root
 
     # Install and activate the default WordPress theme
     wp theme install twentytwentyfour --activate --allow-root

@@ -1,7 +1,9 @@
+# Network
 networks:
     inception:
       driver: bridge
 
+# Volumes
 volumes:
   mariadb_data:
     driver: local
@@ -9,14 +11,18 @@ volumes:
     driver: local
   portainer_data:
     driver: local
+  redis_data:
+    driver: local
 
+# Services
 services:
+# Nginx
   nginx:
     build: ./requirements/nginx
     container_name: nginx
     ports:
       - 443:443
-    depends_on: # start when mariadb and wordpress are ready
+    depends_on: # start when necessary services are ready
       mariadb:
         condition: service_healthy
       wordpress:
@@ -31,6 +37,7 @@ services:
     networks:
       - inception
 
+  # Mariadb
   mariadb:
     build: ./requirements/mariadb
     container_name: mariadb
@@ -48,6 +55,7 @@ services:
       #start_period: 30s
       timeout: 5s
 
+  # Wordpress
   wordpress:
     build: ./requirements/wordpress
     container_name: wordpress
@@ -59,6 +67,7 @@ services:
     networks:
       - inception
 
+  # Go-web
   go-web:
     build: ./requirements/go-web
     container_name: go-web
@@ -67,6 +76,7 @@ services:
     networks:
       - inception
 
+  # Pure-FTPd
   ftp:
     build: ./requirements/ftp
     container_name: ftp
@@ -81,13 +91,17 @@ services:
     networks:
       - inception
 
+  # Redis
   redis:
     build: ./requirements/redis
     container_name: redis
     restart: always
     networks:
       - inception
+    volumes:
+    - redis_data:/data
 
+  # Adminer
   adminer:
     build: ./requirements/adminer
     container_name: adminer
@@ -97,6 +111,7 @@ services:
     networks:
       - inception
 
+  # Portainer
   portainer:
     build: ./requirements/portainer
     container_name: portainer
