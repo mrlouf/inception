@@ -30,3 +30,10 @@ And a couple of personal tips:
 + If you use your own computer, you will have to install Docker first, and then add your user to the Docker group to run the service. It took me about 5 minutes following the [official Docker's instruction](https://docs.docker.com/engine/install/ubuntu/).
 + Use **'docker logs < container >'** a lot. This command is your best friend for debugging faulty containers, check why your mariadb is not initialised, etc. It has saved me many times over.
 + Be careful when mounting up containers without stopping them first; you should regularly stop and remove them all, remove their images to avoid orphans and build them again if you have made significant changes.
++ Be ready to spend a lot of time idling in front of your terminal, gazing into the eternal abyss while your containers load. I spent about half of my logged-in time for this project watching the loading progress.
++ Having said that, the terminal will occasionally show error messages if a container could not be mounted: pay attention to any such message. It might sound trivial, but it is easy to miss a key clue as to why your database does not load or your Wordpress is empty.
++ If you face issues (spoiler: you will), you should be able to identify the cause: if you get a 502 gateway error trying to reach your static webpage, it is probably a port issue that could be related to your static container OR your nginx container. Simply because one service does not work, does not mean that the related container is automatically the faulty one. Always try to think from the broader perspective, as trivial as it might sound.
+
+If you have made it reading that far, I thank you for your time and I wish you good luck on your own project.
+\
+Nicolas
