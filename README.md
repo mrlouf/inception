@@ -6,7 +6,7 @@ Dear fellow 42 student,\
 In this repo you will find my complete project that I submitted, and successfully passed.
 As tempting as it may be, I strongly discourage you to blindly copy it and pass it as your own, as it sometimes happens.
 I do understand that, for many people, the subject of system administration, virtualisation, containers and micro-services may be very abstract, difficult and overall it may seem like a waste of time.
-I do believe that to be a decent programmer, you do not only need to be able to write good code, but you should also have a deep understanding of the tools you use to write it.
+I do believe that to be a decent programmer though, you do not only need to be able to write good code, but you should also have a deep understanding of the tools you use to write it.
 If you can write programs in C and C++, you should be just as able to implement a simple infrastructure of micro-services using Docker containers and shell scripts.
 
 I personally loved this project. As much as I like writing actual code, I enjoyed the idea of implementing my very own infrastructure.
