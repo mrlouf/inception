@@ -1,5 +1,5 @@
 # Inception
-### A project hated by many, loved by few
+### A project hated by many, loved by few\
 
 Dear fellow 42 student,\
 \
