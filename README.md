@@ -1,6 +1,6 @@
 # Inception
-### A project hated by many, loved by few\
-
+### A project hated by many, loved by few
+\
 Dear fellow 42 student,\
 \
 In this repo you will find my complete project that I submitted, and successfully passed.
