@@ -6,13 +6,11 @@
 #    By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/28 13:10:42 by nponchon          #+#    #+#              #
-#    Updated: 2025/02/28 17:52:14 by nponchon         ###   ########.fr        #
+#    Updated: 2025/03/31 10:18:40 by nponchon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 up:
-	mkdir -p ${HOME}/data/wordpress
-	mkdir -p ${HOME}/data/mysql
 	docker compose --env-file ./srcs/.env -f ./srcs/docker-compose.yml up -d --build
 
 down:
@@ -30,4 +28,3 @@ clean:
 
 fclean:
 	$(MAKE) clean
-	sudo rm -rf ${HOME}/data/mysql ${HOME}/data/wordpress
